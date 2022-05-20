@@ -17,10 +17,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
+import br.com.softblue.bluefood.application.service.RelatorioService;
 import br.com.softblue.bluefood.application.service.RestauranteService;
 import br.com.softblue.bluefood.domain.pedido.Pedido;
 import br.com.softblue.bluefood.domain.pedido.PedidoRepository;
+import br.com.softblue.bluefood.domain.pedido.RelatorioItemFaturamento;
+import br.com.softblue.bluefood.domain.pedido.RelatorioItemFilter;
+import br.com.softblue.bluefood.domain.pedido.RelatorioPedidoFilter;
 import br.com.softblue.bluefood.domain.restaurante.CategoriaRestauranteRepository;
 import br.com.softblue.bluefood.domain.restaurante.ItemCardapio;
 import br.com.softblue.bluefood.domain.restaurante.ItemCardapioRepository;
@@ -48,6 +51,10 @@ public class RestauranteController {
 	@Autowired
 	private PedidoRepository pedidoRepository;
 	
+	@Autowired
+	private RelatorioService relatorioService;
+	
+	
 
 	@GetMapping(path = "/home")
 	public String home(Model model) {
@@ -57,6 +64,8 @@ public class RestauranteController {
 		
 		return "restaurante-home";
 	}
+	
+	// Esse projeto é o completo? Está faltando endpoints.não
 	
 	@GetMapping("/edit")
 	public String edit(Model model) {
@@ -157,6 +166,37 @@ public class RestauranteController {
 		return "restaurante-pedido";
 	}
 	
+	// FAltandi isso aqui
+	@GetMapping("/relatorio/pedidos")
+	public String relatorioPedidos(
+			@ModelAttribute("relatorioPedidoFilter") RelatorioPedidoFilter filter,
+			Model model) {
+		
+		Integer restauranteId = SecurityUtils.loggedRestaurante().getId();
+		List<Pedido> pedidos = relatorioService.listPedidos(restauranteId, filter);
+		model.addAttribute("pedidos", pedidos);
+		
+		model.addAttribute("filter", filter);
+		
+		return "restaurante-relatorio-Pedidos";
+	}
+	
+	@GetMapping("/relatorio/itens")
+	public String relatorioItens(
+			@ModelAttribute("relatorioItemFilter") RelatorioItemFilter filter,
+			Model model) {
+		Integer restauranteId = SecurityUtils.loggedRestaurante().getId();
+		
+		List<ItemCardapio> itensCardapio = itemCardapioRepository.findByRestaurante_IdOrderByNome(restauranteId);
+		model.addAttribute("itensCardapio", itensCardapio);
+		
+		List<RelatorioItemFaturamento> itensCalculados = relatorioService.calcularFaturamentoItens(restauranteId, filter);
+		model.addAttribute("itensCalculados", itensCalculados);
+		
+		model.addAttribute("relatorioItemFilter", filter);
+		
+		return "restaurante-relatorio-Itens";
+	}
 	
 	
 }
