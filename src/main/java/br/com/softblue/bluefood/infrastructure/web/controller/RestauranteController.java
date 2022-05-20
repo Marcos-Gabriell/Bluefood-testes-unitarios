@@ -167,7 +167,7 @@ public class RestauranteController {
 	}
 	
 	// FAltandi isso aqui
-	@GetMapping("/relatorio/pedidos")
+	@GetMapping("/relatorio/Pedidos")
 	public String relatorioPedidos(
 			@ModelAttribute("relatorioPedidoFilter") RelatorioPedidoFilter filter,
 			Model model) {
@@ -181,7 +181,7 @@ public class RestauranteController {
 		return "restaurante-relatorio-Pedidos";
 	}
 	
-	@GetMapping("/relatorio/itens")
+	@GetMapping("/relatorio/Itens")
 	public String relatorioItens(
 			@ModelAttribute("relatorioItemFilter") RelatorioItemFilter filter,
 			Model model) {
