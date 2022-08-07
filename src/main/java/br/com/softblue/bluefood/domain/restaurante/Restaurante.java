@@ -43,7 +43,7 @@ public class Restaurante extends Usuario {
 	
 
 	@NotBlank(message = "O CNPJ não pode ser vazio")
-	@Pattern(regexp = "[0-9]{14}", message = "O CNPJ possui formato inv�lido")
+	@Pattern(regexp = "[0-9]{14}", message = "O CNPJ possui formato inválido")
 	@Column(length = 14, nullable = false)
 	private String cnpj;
 	

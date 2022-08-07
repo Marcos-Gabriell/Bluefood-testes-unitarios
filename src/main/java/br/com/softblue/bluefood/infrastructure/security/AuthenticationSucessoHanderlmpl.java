@@ -25,7 +25,7 @@ public class AuthenticationSucessoHanderlmpl implements AuthenticationSuccessHan
 		} else if (role == Role.RESTAURANTE) {
 			response.sendRedirect("restaurante/home");
 		} else {
-			throw new IllegalStateException("Erro na autenticação"); 
+			throw new IllegalStateException("Erro na autenticaÃ§Ã£o"); 
 	  }
 	}	 
 }
