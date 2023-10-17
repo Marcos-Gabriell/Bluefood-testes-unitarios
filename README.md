@@ -32,4 +32,5 @@ Certifique-se de ter uma das IDEs acima instalada para facilitar o desenvolvimen
    git clone https://github.com/Marcos-Gabriell/Bluefood-testes-unitarios.git
 
 2. Abra o projeto em sua IDE de preferência, como Eclipse, IntelliJ ou VS Code.
+3. Execute os testes.
 
