@@ -1,4 +1,4 @@
-# Projeto de Estudos em Testes Unitários com JavaJUnit e Mockito
+# Projeto de Estudos em Testes Unitários com Java,JUnit e Mockito
 
 Este é o repositório do projeto de implementação de testes unitários com JUnit e Mockito, desenvolvido para fins de estudo.
 
